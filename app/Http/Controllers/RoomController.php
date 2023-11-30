@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RoomController extends Controller
 {
@@ -20,9 +22,8 @@ class RoomController extends Controller
          $newRoom = Room::crate(
             [
                "name" => $request->name, //del body el name
-               "description" => $request->description, //del body la description
                "videogame_id" => $videogame,
-               "room_owner_id" => $user
+               "room_owner" => $user
             ]
          );
 
@@ -31,10 +32,10 @@ class RoomController extends Controller
                'message' => 'Room created successfully',
                'room' => $newRoom
             ],
-            201
+            Response::HTTP_CREATED
          );
       } catch (\Throwable) {
-         return response()->json(['message' => 'Error creating room'], 500);
+         return response()->json(['message' => 'Error creating room'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
 
@@ -43,17 +44,17 @@ class RoomController extends Controller
       try {
          $rooms = Room::query()
             ->get(["id", "name", "description", "videogame_id", "room_owner_id"]);
-            
+
 
          return response()->json(
             [
                'message' => 'Rooms listed successfully',
                'rooms' => $rooms
             ],
-            200
+            Response::HTTP_OK
          );
       } catch (\Throwable) {
-         return response()->json(['message' => 'Error listing rooms'], 500);
+         return response()->json(['message' => 'Error listing rooms'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
 
@@ -69,10 +70,10 @@ class RoomController extends Controller
                'message' => 'Rooms listed successfully',
                'rooms' => $rooms
             ],
-            200
+            response::HTTP_OK
          );
       } catch (\Throwable) {
-         return response()->json(['message' => 'Error listing rooms'], 500);
+         return response()->json(['message' => 'Error listing rooms'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
    public function deleteRoom($id)
@@ -89,10 +90,10 @@ class RoomController extends Controller
                'message' => 'Room deleted successfully',
                'room' => $room
             ],
-            200
+            response::HTTP_OK
          );
       } catch (\Throwable) {
-         return response()->json(['message' => 'Error deleting room'], 500);
+         return response()->json(['message' => 'Error deleting room'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
 }
