@@ -15,18 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 
 //rutas de autorizacion
 
-Route::post('/register',[AuthController::class,'register']);
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/register',[UserController::class,'register']);
+Route::post('/login',[UserController::class,'login']);
 
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function ()
+{
 //rutas de usuarios
 
 Route::get('/users',[UserController::class,'profile']);
+Route::post('/logout', [AuthController::class, 'logout']);
+});
 Route::put('/users',[UserController::class,'update']); //actualizar perfil menos contraseña/mail -opcional
 Route::put('/users/password',[UserController::class,'changePassword']); //actualizar contraseña -opcional
 Route::put('/users/inactivate',[UserController::class,'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
@@ -60,3 +67,6 @@ Route::post('/messages',[MessageController::class,'create']); //solo para miembr
 Route::get('/messages',[MessageController::class,'getMessages']); //solo para miembros de sala
 Route::delete('/messages/{id}',[MessageController::class,'delete']); //solo permitir eliminar mensajes que hayas enviado tu
 Route::put('/messages/{id}',[MessageController::class,'update']); //solo permitir editar mensajes que hayas enviado tu
+
+});
+
