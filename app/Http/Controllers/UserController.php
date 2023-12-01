@@ -57,7 +57,7 @@ class UserController extends Controller
                 ],
                 Response::HTTP_CREATED
             );
-        } catch (\Throwable $th) 
+        } catch (\Throwable $th)
         {
             Log::error($th->getMessage());
             return response()->json(
@@ -91,11 +91,11 @@ class UserController extends Controller
             $password = $request->input('password');
 
             $user = User::query()->where('email', $email)->first();
-            if (!$user) 
+            if (!$user)
             {
                 throw new Error('invalid');
             }
-            if (!Hash::check($password, $user->password)) 
+            if (!Hash::check($password, $user->password))
             {
                 throw new Error('invalid');
             }
@@ -110,7 +110,7 @@ class UserController extends Controller
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            if($th->getMessage() === 'invalid') 
+            if($th->getMessage() === 'invalid')
             {
                 return response()->json(
                     [
@@ -158,62 +158,7 @@ class UserController extends Controller
         );
     }
 
-    public function update(Request $request)
-    {
-        try{
-            $userId = Auth::id();
-            $user=User::query()->find($userId);
-
-            $name = $request->input('name');
-            if ($request->has('name')) 
-            {
-                if (strlen($name)>=3 && strlen($name)<=100) 
-                    {  $user->name = $name;   }
-                else 
-                    {  throw new Error('invalid'); }
-                $user->name = $name;
-            }
-
-            $nick = $request->input('nick');
-            if ($request->has('nick')) 
-            {
-                if (strlen($nick)>=3 && strlen($nick)<=100) 
-                     { $user->nick = $nick; }
-                else 
-                    {  throw new Error('invalid');  }
-                $user->nick = $nick;
-            }
-            $user->save();
-
-            return response()->json(
-                [
-                    "success" => true,
-                    "message" => "User updated"
-                ],
-                Response::HTTP_OK
-            );
-        }catch (\Throwable $th) {
-            Log::error($th->getMessage());
-            if($th->getMessage() === 'invalid') 
-                 {
-                     return response()->json(
-                       [
-                        "success" => false,
-                        "message" => "Incorrect data"
-                       ],
-                      Response::HTTP_NOT_MODIFIED
-                     );
-                  }
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Error update user"
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
-
+    
     public function changePassword(Request $request)
     {
         try{
@@ -222,10 +167,10 @@ class UserController extends Controller
 
             $password = $request->input('password');
             if ($request->has('password'))
-            { 
-                if (strlen($password)>=8 && strlen($password)<=10) 
+            {
+                if (strlen($password)>=8 && strlen($password)<=10)
                     { $user->password = $password; }
-                else 
+                else
                     { throw new Error('invalid');  }
             }
             $user->save();
@@ -238,7 +183,7 @@ class UserController extends Controller
             );
         }catch (\Throwable $th) {
             Log::error($th->getMessage());
-            if($th->getMessage() === 'invalid') 
+            if($th->getMessage() === 'invalid')
                  {
                      return response()->json(
                        [
@@ -266,7 +211,7 @@ class UserController extends Controller
 
             $user->is_active = false;
             $user-> save ();
-           
+
             return response()->json(
                 [
                     "success" => true,

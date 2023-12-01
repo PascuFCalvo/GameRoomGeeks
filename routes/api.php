@@ -35,7 +35,7 @@ Route::group([
 Route::get('/profile',[UserController::class,'profile']);
 Route::post('/logout', [UserController::class, 'logout']);
 });
-Route::put('/users',[UserController::class,'update']); //actualizar perfil menos contraseña/mail -opcional
+Route::put('/users',[UserController::class,'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
 Route::put('/users/password',[UserController::class,'changePassword']); //actualizar contraseña -opcional
 Route::put('/users/inactivate',[UserController::class,'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
 
