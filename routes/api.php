@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\VideogameController;
+
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
@@ -26,6 +26,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     //rutas de usuarios
+
 Route::get('/profile', [UserController::class, 'profile']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
@@ -36,6 +37,7 @@ Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "elim
 
 //rutas de videojuegos
 //aqui hace falta el middleware de superadmin para todos los endpoints
+
 Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
 Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
 Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
