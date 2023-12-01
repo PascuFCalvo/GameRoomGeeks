@@ -60,4 +60,4 @@ Route::delete('/members{id}', [MemberController::class, 'delete']); //se elimina
 Route::post('/messages', [MessageController::class, 'create']); //solo para miembros de sala
 Route::get('/messages', [MessageController::class, 'getMessages']); //solo para miembros de sala
 Route::delete('/messages/{id}', [MessageController::class, 'delete']); //solo permitir eliminar mensajes que hayas enviado tu
-Route::put('/messages/{id}', [MessageController::class, 'update']); //solo permitir editar mensajes que hayas enviado tu
+Route::put('/messages/{id}', [MessageController::class, 'editMessages']); //solo permitir editar mensajes que hayas enviado tu
