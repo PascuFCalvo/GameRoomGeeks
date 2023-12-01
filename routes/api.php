@@ -48,12 +48,14 @@ Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "elim
 //rutas de videojuegos
 
 //aqui hace falta el middleware de superadmin para todos los endpoints
-
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () {
 Route::post('/videogame',[VideogameController::class,'createVideogame']); //crear videojuego
+Route::delete('/videogame/{id}',[VideogameController::class,'deleteVideogameById']); //eliminar videojuego
+});
 Route::get('/videogames',[VideogameController::class,'getAllVideogames']);
 Route::get('/videogame/{id}',[VideogameController::class,'getVideogameById']); //listar videojuegos
-Route::delete('/videogame/{id}',[VideogameController::class,'deleteVideogameById']); //eliminar videojuego
-
 
 //rutas de salas
 

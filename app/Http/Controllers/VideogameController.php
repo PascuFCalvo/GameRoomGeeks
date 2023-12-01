@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Videogame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
 class VideogameController extends Controller
@@ -63,19 +65,8 @@ class VideogameController extends Controller
     {
         try {
             $name= $request->input('name');
-            // $id=auth()->user()->id;
-            $role= auth()->user()->roles;
-            $id=$request->input('user_id');
-
-            if($role !=='admin' || $role !=='superadmin'){
-                return response()->json(
-                    [
-                        "success" => false,
-                        "message" => "Error creating videogame"
-                    ],
-                    Response::HTTP_UNAUTHORIZED
-                );
-            }
+            $id=auth()->user()->id;
+            
             $newVideogame = Videogame::create([
                 'name'=> $name,
                 'user_id'=> $id
