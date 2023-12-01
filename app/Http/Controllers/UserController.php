@@ -158,18 +158,61 @@ class UserController extends Controller
         );
     }
 
-    
+    public function updateUsers(Request $request)
+    {
+        try {
+           
+            $user = User::query()->find(auth()->user()->id);
+            
+
+            $name = $request->input('name');
+            $nick = $request->input('nick');
+
+            if ($request->has('name')) {
+                $user->name = $name;
+            }
+
+            if ($request->has('nick')) {
+                $user->nick = $nick;
+            }
+
+            $user->save();
+
+           
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "User updated",
+                    "data" => $user
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating user"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
     public function changePassword(Request $request)
     {
         try{
-            $userId = Auth::id();
-            $user=User::query()->find($userId);
+            
+            $user=User::query()->find(auth()->user()->id);
 
+           
             $password = $request->input('password');
             if ($request->has('password'))
             {
                 if (strlen($password)>=8 && strlen($password)<=10)
-                    { $user->password = $password; }
+                    { $user->password = bcrypt($password); }
+                    
                 else
                     { throw new Error('invalid');  }
             }
