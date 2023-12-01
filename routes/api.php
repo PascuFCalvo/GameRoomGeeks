@@ -1,14 +1,11 @@
 <?php
-
-<<<<<<< HEAD
-use App\Http\Controllers\UserController;
-=======
+use App\Http\Controllers\VideogameController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
->>>>>>> c4dbd07302c7b2c79a7d27d448fed05b18ea09a0
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,78 +16,45 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
-
 //rutas de autorizacion
-
-<<<<<<< HEAD
-Route::post('/register',[UserController::class,'register']);
-Route::post('/login',[UserController::class,'login']);
-=======
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
->>>>>>> c4dbd07302c7b2c79a7d27d448fed05b18ea09a0
-
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login']);
 Route::group([
     'middleware' => ['auth:sanctum']
-], function ()
-{
-//rutas de usuarios
-
-<<<<<<< HEAD
-Route::get('/profile',[UserController::class,'profile']);
+], function () {
+    //rutas de usuarios
+Route::get('/profile', [UserController::class, 'profile']);
 Route::post('/logout', [UserController::class, 'logout']);
-});
-Route::put('/users',[UserController::class,'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
-Route::put('/users/password',[UserController::class,'changePassword']); //actualizar contraseña -opcional
-Route::put('/users/inactivate',[UserController::class,'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
-=======
-Route::get('/users', [UserController::class, 'profile']);
-Route::put('/users', [UserController::class, 'update']); //actualizar perfil menos contraseña/mail -opcional
+Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
 Route::put('/users/password', [UserController::class, 'changePassword']); //actualizar contraseña -opcional
 Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
->>>>>>> c4dbd07302c7b2c79a7d27d448fed05b18ea09a0
+});
+
 
 //rutas de videojuegos
-
 //aqui hace falta el middleware de superadmin para todos los endpoints
-Route::post('/videogames', [VideogameController::class, 'create']); //crear videojuego
-Route::get('/videogames', [VideogameController::class, 'getVideogames']); //listar videojuegos
-Route::delete('/videogames/{id}', [VideogameController::class, 'delete']); //eliminar videojuego
-
+Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
+Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
+Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
+Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
 //rutas de salas
-
 //aqui hace falta el sanctum
 Route::post('/rooms', [RoomController::class, 'createRoom']); //crear sala y crear el room owner lo que tiene es una id de sala y una id de usuario con lo cual se creara el primer registro en la tabla de miembros
 Route::get('/rooms', [RoomController::class, 'getRooms']); //listar salas
 Route::get('/rooms/{id}', [RoomController::class, 'getRoomsbyVideogame']); //hacer un where done la {id} sea la id del videjojuego a filtrar
 Route::delete('/rooms/{id}', [RoomController::class, 'deleteRoom']); //eliminar sala por la id de la sala si cumplias que eras el room owner
 //si el id del room owner coincide con el id del usuario que hace la peticion, se puede eliminar la sala
-
 //rutas de miembros
-
 Route::post('/members', [MemberController::class, 'create']); //se crea un registro en la tabla de miembros (create)
 Route::get('/members', [MemberController::class, 'getMembers']); //se listan todos los miembros de la sala (index)
-Route::delete('/members{id}', [MemberController::class, 'delete']); //se elimina un registro de la tabla de miembros siempre que seas el 
+Route::delete('/members{id}', [MemberController::class, 'delete']); //se elimina un registro de la tabla de miembros siempre que seas el
 //room owner
-
 //rutas de mensajes
 //aqui hace falta el sanctum
-<<<<<<< HEAD
-Route::post('/messages',[MessageController::class,'create']); //solo para miembros de sala
-Route::get('/messages',[MessageController::class,'getMessages']); //solo para miembros de sala
-Route::delete('/messages/{id}',[MessageController::class,'delete']); //solo permitir eliminar mensajes que hayas enviado tu
-Route::put('/messages/{id}',[MessageController::class,'update']); //solo permitir editar mensajes que hayas enviado tu
-
-
-
-=======
 Route::post('/messages', [MessageController::class, 'create']); //solo para miembros de sala
 Route::get('/messages', [MessageController::class, 'getMessages']); //solo para miembros de sala
 Route::delete('/messages/{id}', [MessageController::class, 'delete']); //solo permitir eliminar mensajes que hayas enviado tu
-Route::put('/messages/{id}', [MessageController::class, 'editMessages']); //solo permitir editar mensajes que hayas enviado tu
->>>>>>> c4dbd07302c7b2c79a7d27d448fed05b18ea09a0
+Route::put('/messages/{id}', [MessageController::class, 'update']); //solo permitir editar mensajes que hayas enviado tu
