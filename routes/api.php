@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VideogameController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +35,10 @@ Route::put('/users/inactivate',[UserController::class,'inactivate']); // "elimin
 //rutas de videojuegos
 
 //aqui hace falta el middleware de superadmin para todos los endpoints
-Route:: post ('/videogames',[VideogameController::class,'create']); //crear videojuego
-Route:: get ('/videogames',[VideogameController::class,'getVideogames']); //listar videojuegos
-Route:: delete ('/videogames/{id}',[VideogameController::class,'delete']); //eliminar videojuego
+Route::post('/videogame',[VideogameController::class,'createVideogame']); //crear videojuego
+Route::get('/videogames',[VideogameController::class,'getAllVideogames']);
+Route::get('/videogame/{id}',[VideogameController::class,'getVideogameById']); //listar videojuegos
+Route::delete('/videogame/{id}',[VideogameController::class,'deleteVideogameById']); //eliminar videojuego
 
 //rutas de salas
 
