@@ -64,7 +64,18 @@ class VideogameController extends Controller
         try {
             $name= $request->input('name');
             // $id=auth()->user()->id;
+            $role= auth()->user()->roles;
             $id=$request->input('user_id');
+
+            if($role !=='admin' || $role !=='superadmin'){
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Error creating videogame"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
             $newVideogame = Videogame::create([
                 'name'=> $name,
                 'user_id'=> $id
