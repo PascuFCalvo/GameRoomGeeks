@@ -32,7 +32,7 @@ Route::group([
 {
 //rutas de usuarios
 
-Route::get('/users',[UserController::class,'profile']);
+Route::get('/profile',[UserController::class,'profile']);
 Route::post('/logout', [AuthController::class, 'logout']);
 });
 Route::put('/users',[UserController::class,'update']); //actualizar perfil menos contraseña/mail -opcional
