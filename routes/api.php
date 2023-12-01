@@ -1,6 +1,7 @@
 <?php
- 
+
 use App\Http\Controllers\VideogameController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -37,9 +38,11 @@ Route::group([
     //rutas de usuarios
 
 
-    Route::get('/profile', [UserController::class, 'profile']);
-    Route::post('/logout', [UserController::class, 'logout']);
+Route::get('/profile', [UserController::class, 'profile']);
+Route::post('/logout', [UserController::class, 'logout']);
+
 });
+
 Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
 Route::put('/users/password', [UserController::class, 'changePassword']); //actualizar contraseña -opcional
 Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
@@ -49,10 +52,10 @@ Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "elim
 
 //aqui hace falta el middleware de superadmin para todos los endpoints
 
-Route::post('/videogame',[VideogameController::class,'createVideogame']); //crear videojuego
-Route::get('/videogames',[VideogameController::class,'getAllVideogames']);
-Route::get('/videogame/{id}',[VideogameController::class,'getVideogameById']); //listar videojuegos
-Route::delete('/videogame/{id}',[VideogameController::class,'deleteVideogameById']); //eliminar videojuego
+Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
+Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
+Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
+Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
 
 
 //rutas de salas
