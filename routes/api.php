@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\VideogameController;
+
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
@@ -26,6 +26,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     //rutas de usuarios
+
 Route::get('/profile', [UserController::class, 'profile']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
@@ -36,13 +37,10 @@ Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "elim
 
 //rutas de videojuegos
 //aqui hace falta el middleware de superadmin para todos los endpoints
-
-Route::post('/videogame',[VideogameController::class,'createVideogame']); //crear videojuego
-Route::get('/videogames',[VideogameController::class,'getAllVideogames']);
-Route::get('/videogame/{id}',[VideogameController::class,'getVideogameById']); //listar videojuegos
-Route::delete('/videogame/{id}',[VideogameController::class,'deleteVideogameById']); //eliminar videojuego
-
-
+Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
+Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
+Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
+Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
 //rutas de salas
 //aqui hace falta el sanctum
 Route::post('/rooms', [RoomController::class, 'createRoom']); //crear sala y crear el room owner lo que tiene es una id de sala y una id de usuario con lo cual se creara el primer registro en la tabla de miembros

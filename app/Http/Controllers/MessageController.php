@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -72,7 +74,7 @@ class MessageController extends Controller
             // Maneja la excepción aquí
         }
     }
-    public funciot editMesssage(Request $request, $id)
+    public function editMesssage(Request $request, $id)
     {
         try {
             $message = Message::query()

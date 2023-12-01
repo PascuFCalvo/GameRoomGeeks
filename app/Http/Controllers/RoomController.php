@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\User;
+use App\Models\Videogame;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
