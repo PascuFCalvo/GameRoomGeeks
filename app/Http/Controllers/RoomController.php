@@ -42,6 +42,45 @@ class RoomController extends Controller
          );
       }
    }
+   public function deleteRoom($id)
+   {
+      try {
+         $room = Room::query()
+            ->where("id", $id);
+
+
+         $room->delete();
+
+         return response()->json(
+            [
+               'message' => 'Room deleted successfully',
+               'room' => $room
+            ],
+            response::HTTP_OK
+         );
+      } catch (\Throwable) {
+         return response()->json(['message' => 'Error deleting room'], response::HTTP_INTERNAL_SERVER_ERROR);
+      }
+   }
+   public function updateRoom($id, Request $request)
+   {
+      try {
+         $room = Room::query()
+            ->where("id", $id);
+
+         $room->update($request->all());
+
+         return response()->json(
+            [
+               'message' => 'Room updated successfully',
+               'room' => $room
+            ],
+            response::HTTP_OK
+         );
+      } catch (\Throwable) {
+         return response()->json(['message' => 'Error updating room'], response::HTTP_INTERNAL_SERVER_ERROR);
+      }
+   }
 
    public function getRooms()
    {
@@ -81,44 +120,4 @@ class RoomController extends Controller
          return response()->json(['message' => 'Error listing rooms'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
-   public function deleteRoom($id)
-   {
-      try {
-         $room = Room::query()
-            ->where("id", $id);
-
-
-         $room->delete();
-
-         return response()->json(
-            [
-               'message' => 'Room deleted successfully',
-               'room' => $room
-            ],
-            response::HTTP_OK
-         );
-      } catch (\Throwable) {
-         return response()->json(['message' => 'Error deleting room'], response::HTTP_INTERNAL_SERVER_ERROR);
-      }
-   }
-
-   public function updateRoom($id, Request $request)
-   {
-      try {
-         $room = Room::query()
-            ->where("id", $id);
-
-         $room->update($request->all());
-
-         return response()->json(
-            [
-               'message' => 'Room updated successfully',
-               'room' => $room
-            ],
-            response::HTTP_OK
-         );
-      } catch (\Throwable) {
-         return response()->json(['message' => 'Error updating room'], response::HTTP_INTERNAL_SERVER_ERROR);
-      }
-   }  
 }

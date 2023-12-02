@@ -11,56 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VideogameController extends Controller
 {
-    public function getAllVideogames(Request $request)
-    {
-        try {
-            $videogames = Videogame::query()->get();
-            return response()->json(
-                [
-                    "success" => true,
-                    "message" => "Get all videogames successfully",
-                    "data" => $videogames
-                ],
-                Response::HTTP_OK
-            );
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage());
-
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Error getting all videogames"
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
-
-    public function getVideogameById(Request $request, $id)
-    {
-        try {
-            $videogame = Videogame::query()->find($id);
-            return response()->json(
-                [
-                    "success" => true,
-                    "message" => "Get videogame successfully",
-                    "data" => $videogame
-                ],
-                Response::HTTP_OK
-            );
-        } catch (\Throwable $th) {
-            Log::error($th->getMessage());
-
-            return response()->json(
-                [
-                    "success" => false,
-                    "message" => "Error getting videogame"
-                ],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
-
     public function createVideogame(Request $request)
     {
         try {
@@ -91,7 +41,6 @@ class VideogameController extends Controller
             );
         }
     }
-
     public function deleteVideogameById(Request $request, $id)
     {
         try {
@@ -143,4 +92,55 @@ class VideogameController extends Controller
             );
         }
     }
+    public function getAllVideogames(Request $request)
+    {
+        try {
+            $videogames = Videogame::query()->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Get all videogames successfully",
+                    "data" => $videogames
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all videogames"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function getVideogameById(Request $request, $id)
+    {
+        try {
+            $videogame = Videogame::query()->find($id);
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Get videogame successfully",
+                    "data" => $videogame
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting videogame"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+
 }

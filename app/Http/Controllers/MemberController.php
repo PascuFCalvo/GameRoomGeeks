@@ -9,7 +9,7 @@ use Illuminate\Http\Response; // Asegúrate de importar la clase Response
 
 class MemberController extends Controller
 {
-    public function createMember(Request $request) // Corregí el nombre de la función
+    public function createMember(Request $request)
     {
         try {
             $newMember = Member::create(
@@ -30,7 +30,7 @@ class MemberController extends Controller
         }
     }
 
-    public function deleteMember(Request $request, $id) 
+    public function deleteMember(Request $request, $id)
     {
         try {
             $member = Member::query()
@@ -67,5 +67,4 @@ class MemberController extends Controller
             // Maneja la excepción aquí
         }
     }
-    
 }
