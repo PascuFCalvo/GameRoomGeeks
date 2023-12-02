@@ -47,24 +47,31 @@ class MemberController extends Controller
         }
     }
 
-    public function deleteMember(Request $request, $id) 
+    public function deleteMember(Request $request) 
     {
         try {
-            $member = Member::query()
-                ->where("id", $id)
-                ->firstOrFail();
-
-            $member->delete();
+            $userId= auth()->user()->id;
+            $roomId = $request->input("room_id");
+            $user = User::find($userId);
+            $user->rooms()->detach($roomId);   
 
             return response()->json(
                 [
+                    'success' => true,
                     'message' => 'Member deleted successfully',
-                    'member' => $member
                 ],
                 Response::HTTP_OK
             );
-        } catch (\Throwable $e) {
-            // Maneja la excepción aquí
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting member"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
     }
     public function getMembers(Request $request)
