@@ -75,7 +75,7 @@ class UserController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'email' => 'required | email',
-                'password' => 'required',
+                'password' => 'required | min:8|max:10',
             ]);
             if ($validator->fails()) {
                 return response()->json(
@@ -91,6 +91,11 @@ class UserController extends Controller
             $password = $request->input('password');
 
             $user = User::query()->where('email', $email)->first();
+          
+            if ($user->is_active === 0)
+            {
+                throw new Error('Is active false');
+            }
             if (!$user)
             {
                 throw new Error('invalid');
@@ -120,7 +125,16 @@ class UserController extends Controller
                     Response::HTTP_NOT_FOUND
                 );
             }
-
+            if($th->getMessage() === 'Is active false')
+            {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
             return response()->json(
                 [
                     "success" => false,
@@ -134,6 +148,16 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $user = auth()->user();
+        if ($user->is_active === 0)
+            {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
         return response()->json(
             [
                 "success" => true,
@@ -161,24 +185,36 @@ class UserController extends Controller
     public function updateUsers(Request $request)
     {
         try {
-           
             $user = User::query()->find(auth()->user()->id);
-            
-
             $name = $request->input('name');
             $nick = $request->input('nick');
 
-            if ($request->has('name')) {
-                $user->name = $name;
+            if ($user->is_active === 0)
+            {
+                throw new Error('Is active false');
             }
-
-            if ($request->has('nick')) {
-                $user->nick = $nick;
+            if ($request->has('name')) 
+            {
+                if (strlen($name)>3 && strlen($name)<100) 
+                {
+                    $user->name = $name;
+                }
+                else { throw new Error('invalid'); }
             }
-
+            if ($request->has('nick')) 
+            {
+                if (strlen($nick)>3 && strlen($nick)<100) 
+                {
+                    $user->nick = $nick;
+                }
+                else { throw new Error('invalid'); }
+            }
             $user->save();
 
-           
+            $accessToken = $request->bearerToken();
+            $token = PersonalAccessToken::findToken($accessToken);
+            $token->delete();
+
             return response()->json(
                 [
                     "success" => true,
@@ -189,7 +225,26 @@ class UserController extends Controller
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-
+            if($th->getMessage() === 'Is active false')
+            {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+            if($th->getMessage() === 'invalid')
+            {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Email or password are invalid"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
             return response()->json(
                 [
                     "success" => false,
@@ -206,7 +261,11 @@ class UserController extends Controller
             
             $user=User::query()->find(auth()->user()->id);
 
-           
+            if ($user->is_active === 0)
+            {
+                throw new Error('Is active false');
+            }
+
             $password = $request->input('password');
             if ($request->has('password'))
             {
@@ -217,6 +276,11 @@ class UserController extends Controller
                     { throw new Error('invalid');  }
             }
             $user->save();
+
+            $accessToken = $request->bearerToken();
+            $token = PersonalAccessToken::findToken($accessToken);
+            $token->delete();
+
             return response()->json(
                 [
                     "success" => true,
@@ -226,6 +290,16 @@ class UserController extends Controller
             );
         }catch (\Throwable $th) {
             Log::error($th->getMessage());
+            if($th->getMessage() === 'Is active false')
+            {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
             if($th->getMessage() === 'invalid')
                  {
                      return response()->json(

@@ -48,12 +48,12 @@ class User extends Authenticatable
 
     public function members(): HasMany
     {
-        return $this->hasMany(member::class);
+        return $this->hasMany(Member::class);
     }
 
-    public function videoGames(): HasMany
+    public function videogames(): HasMany
     {
-        return $this->hasMany(videoGames::class);
+        return $this->hasMany(Videogame::class);
     }
 
     public function messages(): HasMany
