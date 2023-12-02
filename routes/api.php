@@ -3,6 +3,7 @@
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideogameController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,13 +28,14 @@ Route::group([
 ], function () {
     //rutas de usuarios
 
-Route::get('/profile', [UserController::class, 'profile']);
-Route::post('/logout', [UserController::class, 'logout']);
-Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
-Route::put('/users/password', [UserController::class, 'changePassword']); //actualizar contraseña -opcional
-Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
-Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
-Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
+    Route::get('/profile', [UserController::class, 'profile']);
+    Route::post('/logout', [UserController::class, 'logout']);
+    Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
+    Route::put('/users/password', [UserController::class, 'changePassword']); //actualizar contraseña -opcional
+    Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
+    Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
+    Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
+    Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']); //actualizar videojuego
 });
 
 

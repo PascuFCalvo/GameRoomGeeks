@@ -36,7 +36,7 @@ class VideogameController extends Controller
         }
     }
 
-    public function getVideogameById(Request $request,$id)
+    public function getVideogameById(Request $request, $id)
     {
         try {
             $videogame = Videogame::query()->find($id);
@@ -64,12 +64,12 @@ class VideogameController extends Controller
     public function createVideogame(Request $request)
     {
         try {
-            $name= $request->input('name');
-            $id=auth()->user()->id;
-            
+            $name = $request->input('name');
+            $id = auth()->user()->id;
+
             $newVideogame = Videogame::create([
-                'name'=> $name,
-                'user_id'=> $id
+                'name' => $name,
+                'user_id' => $id
             ]);
             return response()->json(
                 [
@@ -95,12 +95,12 @@ class VideogameController extends Controller
     public function deleteVideogameById(Request $request, $id)
     {
         try {
-            $deletedVideogame= Videogame::destroy($id);
+            $deletedVideogame = Videogame::destroy($id);
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Videogame deleted successfully",
-                    "data"=> $deletedVideogame
+                    "data" => $deletedVideogame
                 ],
                 Response::HTTP_OK
             );
@@ -111,6 +111,33 @@ class VideogameController extends Controller
                 [
                     "success" => false,
                     "message" => "Error deleting videogame"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+    public function updateVideogameById(Request $request, $id)
+    {
+        try {
+            $videogame = Videogame::query()->find($id);
+            $name = $request->input('name');
+            $videogame->name = $name;
+            $videogame->save();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Videogame updated successfully",
+                    "data" => $videogame
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating videogame"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
