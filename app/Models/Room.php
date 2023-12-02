@@ -12,11 +12,17 @@ class Room extends Model
    use HasFactory;
 
    protected $fillable = [
-      'name',
-      'description',
+      "name",
       'videogame_id',
-      'room_owner_id'
+      'room_owner'
    ];
+
+   protected $attributes = [
+      'name' => '', // 
+      'videogame_id' => 1,
+   ];
+
+   protected $table = 'room';
 
    public function roomOwner(): BelongsTo
    {

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
-use App\Models\User;
 use App\Models\Videogame;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class RoomController extends Controller
@@ -13,30 +13,33 @@ class RoomController extends Controller
    public function createRoom(Request $request)
    {
       try {
-         $user = User::query()
-            ->where("isActive", true)
-            ->get(["id"]);
+         $name = $request->input('name');
+         $videogame_id = $request->input('videogame_id');
+         $id = auth()->user()->id;
 
-         $videogame = Videogame::query()
-            ->get(["id"]);
-
-         $newRoom = Room::crate(
-            [
-               "name" => $request->name, //del body el name
-               "videogame_id" => $videogame,
-               "room_owner" => $user
-            ]
-         );
-
+         $newRoom = Room::create([
+            'name' => $name,
+            'videogame_id' => $videogame_id,
+            'room_owner' => $id
+         ]);
          return response()->json(
             [
-               'message' => 'Room created successfully',
-               'room' => $newRoom
+               "success" => true,
+               "message" => "Created room successfully",
+               "data" => $newRoom
             ],
             Response::HTTP_CREATED
          );
-      } catch (\Throwable) {
-         return response()->json(['message' => 'Error creating room'], response::HTTP_INTERNAL_SERVER_ERROR);
+      } catch (\Throwable $th) {
+         Log::error($th->getMessage());
+
+         return response()->json(
+            [
+               "success" => false,
+               "message" => "Error creating room"
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR
+         );
       }
    }
 
@@ -44,7 +47,7 @@ class RoomController extends Controller
    {
       try {
          $rooms = Room::query()
-            ->get(["id", "name", "description", "videogame_id", "room_owner_id"]);
+            ->get(["id", "name", "videogame_id", "room_owner"]);
 
 
          return response()->json(
@@ -64,7 +67,7 @@ class RoomController extends Controller
       try {
          $rooms = Room::query()
             ->where("videogame_id", $id)
-            ->get(["id", "name", "description", "videogame_id", "room_owner_id"]);
+            ->get(["id", "name", "videogame_id", "room_owner"]);
 
          return response()->json(
             [
@@ -73,7 +76,8 @@ class RoomController extends Controller
             ],
             response::HTTP_OK
          );
-      } catch (\Throwable) {
+      } catch (\Throwable $th) {
+         Log::error($th->getMessage());
          return response()->json(['message' => 'Error listing rooms'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
@@ -81,8 +85,8 @@ class RoomController extends Controller
    {
       try {
          $room = Room::query()
-            ->where("id", $id)
-            ->get(["id", "name", "description", "videogame_id", "room_owner_id"]);
+            ->where("id", $id);
+
 
          $room->delete();
 
@@ -97,4 +101,24 @@ class RoomController extends Controller
          return response()->json(['message' => 'Error deleting room'], response::HTTP_INTERNAL_SERVER_ERROR);
       }
    }
+
+   public function updateRoom($id, Request $request)
+   {
+      try {
+         $room = Room::query()
+            ->where("id", $id);
+
+         $room->update($request->all());
+
+         return response()->json(
+            [
+               'message' => 'Room updated successfully',
+               'room' => $room
+            ],
+            response::HTTP_OK
+         );
+      } catch (\Throwable) {
+         return response()->json(['message' => 'Error updating room'], response::HTTP_INTERNAL_SERVER_ERROR);
+      }
+   }  
 }

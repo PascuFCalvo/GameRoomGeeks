@@ -36,19 +36,20 @@ Route::group([
     Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
     Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
     Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']); //actualizar videojuego
+    Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
+    Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
+    Route::post('/rooms', [RoomController::class, 'createRoom']); //crear sala y crear el room owner lo que tiene es una id de sala y una id de usuario con lo cual se creara el primer registro en la tabla de miembros
+    Route::get('/rooms', [RoomController::class, 'getRooms']); //listar salas
+    Route::get('/rooms/{id}', [RoomController::class, 'getRoomsbyVideogame']); //hacer un where done la {id} sea la id del videjojuego a filtrar
+    Route::delete('/rooms/{id}', [RoomController::class, 'deleteRoom']); //eliminar sala por la id de la sala si cumplias que eras el room owner
+    Route::put('/rooms/{id}', [RoomController::class, 'updateRoom']); //actualizar sala por la id de la sala si cumplias que eras el room owner
 });
 
 
 //rutas de videojuegos
 //aqui hace falta el middleware de superadmin para todos los endpoints
-Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
-Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
 //rutas de salas
 //aqui hace falta el sanctum
-Route::post('/rooms', [RoomController::class, 'createRoom']); //crear sala y crear el room owner lo que tiene es una id de sala y una id de usuario con lo cual se creara el primer registro en la tabla de miembros
-Route::get('/rooms', [RoomController::class, 'getRooms']); //listar salas
-Route::get('/rooms/{id}', [RoomController::class, 'getRoomsbyVideogame']); //hacer un where done la {id} sea la id del videjojuego a filtrar
-Route::delete('/rooms/{id}', [RoomController::class, 'deleteRoom']); //eliminar sala por la id de la sala si cumplias que eras el room owner
 //si el id del room owner coincide con el id del usuario que hace la peticion, se puede eliminar la sala
 //rutas de miembros
 Route::post('/members', [MemberController::class, 'create']); //se crea un registro en la tabla de miembros (create)
