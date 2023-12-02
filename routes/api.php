@@ -23,6 +23,14 @@ use Illuminate\Support\Facades\Route;
 //rutas de autorizacion
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'is_superadmin']
+], function () {
+    Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
+    Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']); //actualizar videojuego
+    Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
+});
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
@@ -33,9 +41,6 @@ Route::group([
     Route::put('/users', [UserController::class, 'updateUsers']); //actualizar perfil menos contraseña/mail -opcional
     Route::put('/users/password', [UserController::class, 'changePassword']); //actualizar contraseña -opcional
     Route::put('/users/inactivate', [UserController::class, 'inactivate']); // "eliminar" usuario , pasar el isActive a false -opcional
-    Route::post('/videogame', [VideogameController::class, 'createVideogame']); //crear videojuego
-    Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']); //eliminar videojuego
-    Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']); //actualizar videojuego
     Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
     Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']); //listar videojuegos
     Route::post('/rooms', [RoomController::class, 'createRoom']); //crear sala y crear el room owner lo que tiene es una id de sala y una id de usuario con lo cual se creara el primer registro en la tabla de miembros
