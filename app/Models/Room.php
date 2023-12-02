@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Room extends Model
 {
@@ -26,11 +26,17 @@ class Room extends Model
 
    public function roomOwner(): BelongsTo
    {
-      return $this->belongsTo(Member::class); //de esto tengo dudas
+      // to do : esta relacion es con user
+      return $this->belongsTo(Member::class); //de esto tengo dudas 
    }
 
    public function videogame(): BelongsTo
    {
       return $this->belongsTo(Videogame::class); //de esto tengo dudas
    }
+
+   public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class,'members');
+    }
 }

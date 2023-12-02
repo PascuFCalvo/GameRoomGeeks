@@ -48,6 +48,8 @@ Route::group([
     Route::get('/rooms/{id}', [RoomController::class, 'getRoomsbyVideogame']); //hacer un where done la {id} sea la id del videjojuego a filtrar
     Route::delete('/rooms/{id}', [RoomController::class, 'deleteRoom']); //eliminar sala por la id de la sala si cumplias que eras el room owner
     Route::put('/rooms/{id}', [RoomController::class, 'updateRoom']); //actualizar sala por la id de la sala si cumplias que eras el room owner
+    Route::post('/members', [MemberController::class, 'createMember']); //se crea un registro en la tabla de miembros (create)
+    Route::get('/members', [MemberController::class, 'getMembers']); //se listan todos los miembros de la sala (index)
 });
 
 
@@ -57,8 +59,6 @@ Route::group([
 //aqui hace falta el sanctum
 //si el id del room owner coincide con el id del usuario que hace la peticion, se puede eliminar la sala
 //rutas de miembros
-Route::post('/members', [MemberController::class, 'create']); //se crea un registro en la tabla de miembros (create)
-Route::get('/members', [MemberController::class, 'getMembers']); //se listan todos los miembros de la sala (index)
 Route::delete('/members{id}', [MemberController::class, 'delete']); //se elimina un registro de la tabla de miembros siempre que seas el
 //room owner
 //rutas de mensajes

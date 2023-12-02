@@ -3,30 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member; // Asegúrate de importar el modelo Member
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response; // Asegúrate de importar la clase Response
+use Illuminate\Support\Facades\Log;
 
 class MemberController extends Controller
 {
     public function createMember(Request $request) // Corregí el nombre de la función
     {
         try {
-            $newMember = Member::create(
-                [
-                    "user_id" => $request->user_id,
-                    "room_id" => $request->room_id,
-                ]
-            );
+            $userId= auth()->user()->id;
+            $roomId = $request->input("room_id");
+            $user = User::find($userId);
+            
+            $user->rooms()->attach($roomId);
+                
             return response()->json(
                 [
-                    'message' => 'Member created successfully',
-                    'member' => $newMember
+                    'success'=>true,
+                    'message' => 'Member added successfully'
                 ],
                 Response::HTTP_CREATED
             );
-        } catch (\Throwable $e) {
-            // Maneja la excepción aquí
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error adding member"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
     }
 
