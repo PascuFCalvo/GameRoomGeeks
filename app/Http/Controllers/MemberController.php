@@ -25,6 +25,7 @@ class MemberController extends Controller
                     Response::HTTP_NOT_FOUND
                 );
             }
+            //to do: Manejar respuesta en caso de que ese usuario ya este añadido a esa sala
             $user->rooms()->attach($roomId);
                 
             return response()->json(
@@ -87,8 +88,16 @@ class MemberController extends Controller
                 ],
                 Response::HTTP_OK
             );
-        } catch (\Throwable $e) {
-            // Maneja la excepción aquí
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all members"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
     }
     
