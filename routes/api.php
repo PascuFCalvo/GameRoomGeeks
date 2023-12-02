@@ -31,6 +31,7 @@ Route::group([
     Route::post('/videogame', [VideogameController::class, 'createVideogame']);
     Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']);
     Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']);
+    Route::put('/users/activate/{id}', [UserController::class, 'activate']);
 });
 Route::group([
     'middleware' => ['auth:sanctum']

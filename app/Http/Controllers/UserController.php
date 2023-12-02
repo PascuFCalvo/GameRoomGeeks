@@ -115,22 +115,22 @@ class UserController extends Controller
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            if($th->getMessage() === 'invalid')
-            {
-                return response()->json(
-                    [
-                        "success" => false,
-                        "message" => "Email or password are invalid"
-                    ],
-                    Response::HTTP_NOT_FOUND
-                );
-            }
             if($th->getMessage() === 'Is active false')
             {
                 return response()->json(
                     [
                         "success" => false,
                         "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+            if($th->getMessage() === 'invalid')
+            {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Email or password are invalid"
                     ],
                     Response::HTTP_NOT_FOUND
                 );
@@ -147,6 +147,7 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
+        try{
         $user = auth()->user();
         if ($user->is_active === 0)
             {
@@ -166,6 +167,26 @@ class UserController extends Controller
             ],
             Response::HTTP_OK
         );
+        } catch (\Throwable $th) {
+             Log::error($th->getMessage());
+             if($th->getMessage() === 'Is active false')
+             {
+                return response()->json(
+                [
+                    "success" => false,
+                    "message" => "User not found"
+                ],
+                Response::HTTP_NOT_FOUND
+               );
+             }
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "Error profile user"
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR
+        );
+    }
     }
 
     public function logout(Request $request)
@@ -348,4 +369,28 @@ class UserController extends Controller
          }
     }
 
+    public function activate (Request $request, $id)
+    {
+        try{
+            $user=User::query()->find($id);
+            $user->is_active = true;
+            $user-> save ();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "User is activated"
+                ],
+                Response::HTTP_OK
+            );
+        }catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error activated user"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+         }
+    }
 }
