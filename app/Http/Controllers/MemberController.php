@@ -16,7 +16,15 @@ class MemberController extends Controller
             $userId= auth()->user()->id;
             $roomId = $request->input("room_id");
             $user = User::find($userId);
-            
+            if (!$user){
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
             $user->rooms()->attach($roomId);
                 
             return response()->json(
