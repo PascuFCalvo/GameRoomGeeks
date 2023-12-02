@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Foundation\Console\ViewClearCommand;
@@ -46,9 +47,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function members(): HasMany
+    public function rooms(): BelongsToMany
     {
-        return $this->hasMany(Member::class);
+        return $this->belongsToMany(Room::class,'members');
     }
 
     public function videogames(): HasMany
