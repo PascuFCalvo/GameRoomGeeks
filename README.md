@@ -97,7 +97,7 @@ You'll need add a `.env` based on the provided `.env.example` file with the data
 
 ## Roadmap 🛣️
 
-- **Add notifications** - So users know when their appointments are modified, created or deleted.
+- **Add notifications** - So users know when receive a new message in their groups.
 - **Add a React frontend** - So users can interact with the API from a web browser.
 
 ## Acknowledgements 🎓
