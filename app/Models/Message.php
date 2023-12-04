@@ -11,5 +11,19 @@ class Message extends Model
 {
    use HasFactory;
 
-   protected $fillable = [];
+   protected $fillable = [
+      'room_id',
+      'user_id',
+      'content'
+  ];
+
+  public function room(): BelongsTo
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
