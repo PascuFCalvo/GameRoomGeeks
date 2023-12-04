@@ -56,6 +56,10 @@ Route::group([
     Route::post('/member', [MemberController::class, 'createMember']);
     Route::get('/members', [MemberController::class, 'getMembers']);
     Route::delete('/member', [MemberController::class, 'deleteMember']);
+    Route::post('/message', [MessageController::class, 'create']);
+    Route::get('/messages/{id}', [MessageController::class, 'getMessages']);
+    Route::delete('/messages/{id}', [MessageController::class, 'deleteMessage']);
+    Route::put('/message/{id}', [MessageController::class, 'editMesssage']);
 });
 
 
@@ -63,7 +67,3 @@ Route::group([
 
 
 
-Route::post('/messages', [MessageController::class, 'create']);
-Route::get('/messages', [MessageController::class, 'getMessages']);
-Route::delete('/messages/{id}', [MessageController::class, 'delete']);
-Route::put('/messages/{id}', [MessageController::class, 'update']);
