@@ -42,12 +42,15 @@ class RoomController extends Controller
          );
       }
    }
-   public function deleteRoom($id)
+   public function deleteRoom(Request $request, $id)
    {
       try {
+         $userId = auth()->user()->id;
+     
          $room = Room::query()
-            ->where("id", $id);
-
+            ->where("id", $id)
+            ->where('room_owner', $userId)
+            ->firstOrFail();
 
          $room->delete();
 
@@ -57,6 +60,15 @@ class RoomController extends Controller
                'room' => $room
             ],
             response::HTTP_OK
+         );
+      } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+         return response()->json(
+             [
+                 "success" => false,
+                 "message" => "This room belongs to another room_owner"
+             ],
+             Response::HTTP_NOT_FOUND
          );
       } catch (\Throwable) {
          return response()->json(['message' => 'Error deleting room'], response::HTTP_INTERNAL_SERVER_ERROR);
