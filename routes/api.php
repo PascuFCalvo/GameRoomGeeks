@@ -33,6 +33,7 @@ Route::group([
     Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']);
     Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']);
     Route::put('/users/activate/{id}', [UserController::class, 'activate']);
+    
 });
 Route::group([
     'middleware' => ['auth:sanctum']
@@ -45,8 +46,6 @@ Route::group([
     Route::put('/users/password', [UserController::class, 'changePassword']);
     Route::put('/users/inactivate', [UserController::class, 'inactivate']);
     Route::get('/videogames', [VideogameController::class, 'getAllVideogames']);
-
-
     Route::get('/videogame/{id}', [VideogameController::class, 'getVideogameById']);
     Route::post('/rooms', [RoomController::class, 'createRoom']);
     Route::get('/rooms', [RoomController::class, 'getRooms']);
@@ -54,8 +53,8 @@ Route::group([
     Route::delete('/rooms/{id}', [RoomController::class, 'deleteRoom']);
     Route::put('/rooms/{id}', [RoomController::class, 'updateRoom']);
     Route::post('/member', [MemberController::class, 'createMember']);
-    Route::get('/members', [MemberController::class, 'getMembers']);
     Route::delete('/member', [MemberController::class, 'deleteMember']);
+    Route::get('/members', [MemberController::class, 'getMembers']);
     Route::post('/message', [MessageController::class, 'create']);
     Route::get('/messages/{id}', [MessageController::class, 'getMessages']);
     Route::delete('/messages/{id}', [MessageController::class, 'deleteMessage']);
