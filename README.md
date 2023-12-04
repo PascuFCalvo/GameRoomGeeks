@@ -1,11 +1,11 @@
-# Tattoo Studio API 🖋️
+# 🎮 Game Room API 🎮
 
 Welcome to the GameRoom documentation. This API manages user authentication, game rooms and chat between users . It's the 6th project of the GeeksHub Academy Fullstack Bootcamp, showcasing real-world backend development skills with PHP Laravel and SQL databases.
 
 ## Table of Contents 🗂️
 
 
-- [Features 🌟](#features-)
+- [Features ✨](#features-)
 - [Live Deployment 📡](#live-deployment-)
 - [Installation 🚀](#installation-)
 - [Running directly with composer php artisan](#running-directly-with-composer-php-artisan)
@@ -16,9 +16,9 @@ Welcome to the GameRoom documentation. This API manages user authentication, gam
 
 ## Stack 🛠️
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png" alt="php" width=100/><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Logo.min.svg" alt="laravel" width=150 /><img src="https://pbs.twimg.com/profile_images/1376177684024340483/gB1sRr1__400x400.jpg" alt="thunderclient" width=50/><img src="https://qloudea.com/blog/wp-content/uploads/2022/11/mysql-logo.jpg" alt="MySQL" width =150/><img src="https://assets.stickpng.com/images/62a9c7c08ff6441a2952dad3.png" alt="Docker" width=80/><img src="https://cdn.cookielaw.org/logos/70564414-548a-4286-8ad7-04d95b172a08/e26443c0-68d1-47c8-b8fc-9bc765da2e95/3a159462-db70-43cf-a27d-f602a6baed44/pm-logo-horiz.png" alt="postman" width=120/>
+[![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/manual/es/intro-whatis.php)[![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)[![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com/)[![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white)](https://stackoverflow.com/)[![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/)[![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)[![ThunderClient](https://img.shields.io/badge/Thunder_Client-%237A1FA2?style=for-the-badge)](https://www.thunderclient.com/)[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/)
 
-## Features 🌟
+## Features ✨
 
 - **User Authentication:** 
 - **Room creation:** 
@@ -36,7 +36,7 @@ Get a copy of the project up and running on your local machine for development a
 git clone https://github.com/PascuFCalvo/GameRoomGeeks.git
 cd GameRoomGeeks
 ```
-
+You'll need add a `.env` based on the provided `.env.example` file with the database credentials, and have a MySQL server running.
 
 #### Running directly with composer php artisan
 
@@ -47,16 +47,9 @@ php artisan migrate
 php artisan db:seed            
 ```
 
-You'll need add a `.env` based on the provided `.env.example` file with the database credentials, and have a MySQL server running.
-
-
-
 ## Database Design 📖
 
 <img width="803" alt="ERD" src="./b19c045f-aa15-4800-a49c-1d79851ad4f5.jpg">
-
-
-
 
 
 <details>
@@ -84,16 +77,16 @@ You'll need add a `.env` based on the provided `.env.example` file with the data
 -  ``Route::get('/members')``Get a list of all the members.
 -  ``Route::delete('/member')``Delete a member.
 -  ``Route::post('/messages')``Create a message.
--  ``Route::get('/messages')``Get a list of all messages.
+-  ``Route::get('/messages/{id}')``Get a list of all messages in an especific room.
 -  ``Route::delete('/messages/{id}')``Delete a message.
--  ``Route::put('/messages/{id}')``Edit a message.
+-  ``Route::put('/message/{id}')``Edit a message.
 
 </details>
 
 ## Authors✒️
 
-- **Noelia Marcos** - **Vanesa Brito** - **Pascual Fernandez**
-  - [GitHub Noelia](https://github.com/Noeliamll) - [GitHub Vanesa](https://github.com/vanbrigo) - [GitHub Pascual](https://github.com/PascuFCalvo)
+- **Noelia Marcos** - **Vanessa Brito** - **Pascual Fernandez**
+  - [GitHub Noelia](https://github.com/Noeliamll) - [GitHub Vanessa](https://github.com/vanbrigo) - [GitHub Pascual](https://github.com/PascuFCalvo)
 
 ## Roadmap 🛣️
 
