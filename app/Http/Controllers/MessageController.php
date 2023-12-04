@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\Models\Message;
 use App\Models\Room;
 use App\Models\User;
@@ -75,8 +76,14 @@ class MessageController extends Controller
     public function getMessages(Request $request, $id)
     {
         try {
+            $userId = auth()->user()->id;
+            $member = Member::query()
+                ->where('room_id', $id)
+                ->where('user_id', $userId)
+                ->firstOrFail();
+
             $messages = Message::query()
-                ->where('room_id',$id)
+                ->where('room_id', $id)
                 ->get(["id", "user_id", "room_id", "content"]);
 
             return response()->json(
@@ -86,25 +93,34 @@ class MessageController extends Controller
                 ],
                 Response::HTTP_OK
             );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Member not found in the specified room"
+                ],
+                Response::HTTP_NOT_FOUND
+            );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
 
             return response()->json(
-               [
-                  "success" => false,
-                  "message" => "Error getting messages"
-               ],
-               Response::HTTP_INTERNAL_SERVER_ERROR
+                [
+                    "success" => false,
+                    "message" => "Error getting messages"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
     }
     public function editMesssage(Request $request, $id)
     {
         try {
-            $message=Message::query()->find($id);
-            $newText=$request->input('message');
+            $message = Message::query()->find($id);
+            $newText = $request->input('message');
 
-            $message->content=$newText;
+            $message->content = $newText;
             $message->save();
 
             return response()->json(
@@ -118,11 +134,11 @@ class MessageController extends Controller
             Log::error($th->getMessage());
 
             return response()->json(
-               [
-                  "success" => false,
-                  "message" => "Error editing message"
-               ],
-               Response::HTTP_INTERNAL_SERVER_ERROR
+                [
+                    "success" => false,
+                    "message" => "Error editing message"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
     }
