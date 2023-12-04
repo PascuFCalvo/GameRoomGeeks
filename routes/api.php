@@ -59,5 +59,5 @@ Route::group([
     Route::post('/message', [MessageController::class, 'create']);
     Route::get('/messages/{id}', [MessageController::class, 'getMessages']);
     Route::delete('/messages/{id}', [MessageController::class, 'deleteMessage']);
-    Route::put('/message/{id}', [MessageController::class, 'editMesssage']);
+    Route::put('/message/{id}', [MessageController::class, 'editMessage']);
 });
