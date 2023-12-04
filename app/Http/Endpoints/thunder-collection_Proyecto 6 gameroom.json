@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto 6 gameroom",
-    "dateExported": "2023-12-04T18:08:13.936Z",
+    "dateExported": "2023-12-04T18:55:13.080Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -33,12 +33,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-12-01T08:45:28.873Z",
-            "modified": "2023-12-04T18:04:40.245Z",
+            "modified": "2023-12-04T18:53:17.876Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\":\"paco@paco.com\",\n  \"password\":\"password\"\n}",
+                "raw": "{\n  \"email\":\"superadmin@superadmin.com\",\n  \"password\":\"password\"\n}",
                 "form": []
             },
             "tests": []
@@ -217,6 +217,111 @@
             "auth": {
                 "type": "bearer",
                 "bearer": "3|TYbuUFmNmTI0E5T5WgtfYAv223S6BHUu5dIe9uU66db37101"
+            },
+            "tests": []
+        },
+        {
+            "_id": "510f7d7b-1978-4806-a680-83b7b7cf2ca2",
+            "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
+            "containerId": "",
+            "name": "delete message",
+            "url": "localhost:8000/api/messages/7",
+            "method": "DELETE",
+            "sortNum": 130000,
+            "created": "2023-12-04T18:22:16.841Z",
+            "modified": "2023-12-04T18:22:16.841Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|TYbuUFmNmTI0E5T5WgtfYAv223S6BHUu5dIe9uU66db37101"
+            },
+            "tests": []
+        },
+        {
+            "_id": "eb14643c-8f09-45d0-a801-228ac211c035",
+            "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
+            "containerId": "",
+            "name": "Edit message by id message",
+            "url": "localhost:8000/api/message/12",
+            "method": "PUT",
+            "sortNum": 140000,
+            "created": "2023-12-04T18:30:44.507Z",
+            "modified": "2023-12-04T18:30:44.507Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\":\"Editado y modificado\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|TYbuUFmNmTI0E5T5WgtfYAv223S6BHUu5dIe9uU66db37101"
+            },
+            "tests": []
+        },
+        {
+            "_id": "43d140bf-e701-49e4-b16c-9bf0bc7e2f5b",
+            "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
+            "containerId": "",
+            "name": "delete rooms by room_id",
+            "url": "localhost:8000/api/rooms/4",
+            "method": "DELETE",
+            "sortNum": 150000,
+            "created": "2023-12-04T18:43:40.037Z",
+            "modified": "2023-12-04T18:43:40.037Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|TYbuUFmNmTI0E5T5WgtfYAv223S6BHUu5dIe9uU66db37101"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0e72bd66-aa1c-4171-9ff3-369945c21dd7",
+            "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
+            "containerId": "",
+            "name": "create rooms",
+            "url": "localhost:8000/api/rooms",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-12-04T18:50:34.105Z",
+            "modified": "2023-12-04T18:50:34.105Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Creado para modificar\",\n  \"videogame_id\":\"2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|TYbuUFmNmTI0E5T5WgtfYAv223S6BHUu5dIe9uU66db37101"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e93c72f3-b2ec-438a-b824-6649ce1c2914",
+            "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
+            "containerId": "",
+            "name": "update rooms",
+            "url": "localhost:8000/api/rooms/5",
+            "method": "PUT",
+            "sortNum": 170000,
+            "created": "2023-12-04T18:53:53.951Z",
+            "modified": "2023-12-04T18:53:53.951Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Modificado juego\",\n  \"videogame_id\":\"1\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "4|YsqdIxKHMor7CoZ1YjGNgBh0TjWabdB76TcFuAD98e24f17b"
             },
             "tests": []
         }

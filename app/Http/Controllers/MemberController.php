@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member; // Asegúrate de importar el modelo Member
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response; // Asegúrate de importar la clase Response
@@ -15,6 +16,17 @@ class MemberController extends Controller
         try {
             $userId = auth()->user()->id;
             $roomId = $request->input("room_id");
+            // $room = Room::query()
+            // ->where("id", $roomId)
+            // ->firstOrFail();
+
+            // $userExist = Member::query()
+            // ->where("room_id", $roomId)
+            // ->where("user_id", $user)
+
+            // ->first();
+           
+          
             $user = User::find($userId);
             if (!$user) {
                 return response()->json(
@@ -34,6 +46,15 @@ class MemberController extends Controller
                     'message' => 'Member added successfully'
                 ],
                 Response::HTTP_CREATED
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Room not found"
+                ],
+                Response::HTTP_NOT_FOUND
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
