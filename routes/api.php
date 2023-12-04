@@ -33,7 +33,9 @@ Route::group([
     Route::put('/videogame/{id}', [VideogameController::class, 'updateVideogameById']);
     Route::delete('/videogame/{id}', [VideogameController::class, 'deleteVideogameById']);
     Route::put('/users/activate/{id}', [UserController::class, 'activate']);
-    
+    Route::get('/allRooms', [UserController::class, 'getAllRooms']);
+    Route::get('/allMessages', [UserController::class, 'getAllMessages']);
+
 });
 Route::group([
     'middleware' => ['auth:sanctum']

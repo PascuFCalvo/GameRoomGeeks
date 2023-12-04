@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
+use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -393,4 +395,56 @@ class UserController extends Controller
             );
          }
     }
+
+    public function getAllRooms(Request $request)
+    {
+        try {
+            $rooms = Room::query()->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Get all rooms successfully",
+                    "data" => $rooms
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all rooms"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+
+    public function getAllMessages(Request $request)
+    {
+        try {
+            $messages = Message::query()->get();
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Get all messages successfully",
+                    "data" => $messages
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting all messages"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
 }
