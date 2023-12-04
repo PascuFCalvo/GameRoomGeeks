@@ -60,8 +60,11 @@ class MessageController extends Controller
     public function deleteMessage(Request $request, $id)
     {
         try {
+            $userId = auth()->user()->id;
+
             $message = Message::query()
                 ->where("id", $id)
+                ->where('user_id', $userId)
                 ->firstOrFail();
 
             $message->delete();
@@ -72,6 +75,15 @@ class MessageController extends Controller
                     'message' => $message
                 ],
                 Response::HTTP_OK
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "This message belongs to another user"
+                ],
+                Response::HTTP_NOT_FOUND
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
