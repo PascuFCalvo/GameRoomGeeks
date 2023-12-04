@@ -16,11 +16,15 @@ class MessageController extends Controller
     {
         try {
             $userId = auth()->user()->id;
-
             $roomId = $request->input('room_id');
+
+            $isMember=Member::query()
+            ->where("room_id",$roomId)
+            ->where("user_id",$userId)
+            ->firstOrFail();
+
             $newMessage = Message::create(
                 [
-
                     "user_id" => $userId,
                     "room_id" => $roomId,
                     "content" => $request->input('message')
@@ -32,6 +36,14 @@ class MessageController extends Controller
                     'message' => $newMessage
                 ],
                 Response::HTTP_CREATED
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Member not found in the specified room"
+                ],
+                Response::HTTP_NOT_FOUND
             );
         } catch (\Throwable $th) {
             Log::error($th->getMessage());

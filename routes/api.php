@@ -35,7 +35,6 @@ Route::group([
     Route::put('/users/activate/{id}', [UserController::class, 'activate']);
     Route::get('/allRooms', [UserController::class, 'getAllRooms']);
     Route::get('/allMessages', [UserController::class, 'getAllMessages']);
-
 });
 Route::group([
     'middleware' => ['auth:sanctum']
@@ -62,9 +61,3 @@ Route::group([
     Route::delete('/messages/{id}', [MessageController::class, 'deleteMessage']);
     Route::put('/message/{id}', [MessageController::class, 'editMesssage']);
 });
-
-
-
-
-
-
