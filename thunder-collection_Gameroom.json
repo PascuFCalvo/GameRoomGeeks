@@ -1,0 +1,539 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Gameroom",
+    "dateExported": "2023-12-04T21:37:17.755Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Usercontrollers",
+            "containerId": "",
+            "created": "2023-12-02T09:31:26.000Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "5154fe3d-dbbc-4bc6-8cc0-9919c5dab4d9",
+            "name": "Videogamecontroller",
+            "containerId": "",
+            "created": "2023-12-02T09:48:51.418Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "88a1bae3-6eb4-4677-a1af-da392c41c9db",
+            "name": "Roomcontrollers",
+            "containerId": "",
+            "created": "2023-12-02T10:26:07.542Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "42670011-49f8-454e-aaa2-4f32661a1c4e",
+            "name": "Memberscontrollers",
+            "containerId": "",
+            "created": "2023-12-02T17:23:09.952Z",
+            "sortNum": 70000
+        },
+        {
+            "_id": "9249d4a8-02c1-4f59-9ba8-26e7acc1cd0a",
+            "name": "MessageControllers",
+            "containerId": "",
+            "created": "2023-12-04T08:17:24.465Z",
+            "sortNum": 80000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "db57e5b4-05a0-4473-80d3-320cecab8451",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Register",
+            "url": "localhost:8000/api/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-12-02T09:31:34.042Z",
+            "modified": "2023-12-02T09:37:33.987Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Maricarmen\",\n  \"nick\":\"HadaCarmen\",\n  \"email\":\"maricarmen@maricarmen.com\",\n  \"password\":\"mari1234\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6c706ec2-e90b-465e-9641-807da9cd5b34",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Login",
+            "url": "localhost:8000/api/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-02T09:38:43.248Z",
+            "modified": "2023-12-04T16:00:46.229Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"superadmin@superadmin.com\",\n  \"password\":\"password\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2a518c63-ff1f-4a59-8cf4-64641844150d",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Profile",
+            "url": "localhost:8000/api/profile",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-12-02T09:41:34.213Z",
+            "modified": "2023-12-02T09:41:58.451Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "cf445272-47fd-4463-990b-be764d69752c",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Update user",
+            "url": "localhost:8000/api/users",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-12-02T09:42:32.303Z",
+            "modified": "2023-12-02T09:43:30.008Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"paco2\",\n  \"nick\":\"killerpaco2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "056ba098-21b9-4e0b-ae4a-faa2a4bf65b6",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Change password",
+            "url": "localhost:8000/api/users/password",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2023-12-02T09:43:44.844Z",
+            "modified": "2023-12-02T09:44:40.529Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"password\":\"paco21234\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6af91927-8d4f-4ed1-9c19-e2e4e59cb86b",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "Inactivate",
+            "url": "localhost:8000/api/users/inactivate",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-12-02T09:45:18.030Z",
+            "modified": "2023-12-02T09:45:42.396Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5fb7b597-ba64-4d40-a02e-d2009772d1cb",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "5154fe3d-dbbc-4bc6-8cc0-9919c5dab4d9",
+            "name": "Create",
+            "url": "localhost:8000/api/videogame",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-12-02T09:49:27.574Z",
+            "modified": "2023-12-02T09:50:24.503Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"diablo\"}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b2e563ad-ad39-4ed5-a9d5-0332f1655161",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "5154fe3d-dbbc-4bc6-8cc0-9919c5dab4d9",
+            "name": "Delete",
+            "url": "localhost:8000/api/videogame/3",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2023-12-02T09:53:09.240Z",
+            "modified": "2023-12-02T09:53:28.846Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1184af71-686f-4206-9c68-3a2018b27e9f",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "5154fe3d-dbbc-4bc6-8cc0-9919c5dab4d9",
+            "name": "Get videogame by ID",
+            "url": "localhost:8000/api/videogame/2",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-12-02T09:54:04.322Z",
+            "modified": "2023-12-02T09:54:14.804Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7e291617-bffb-493f-8df8-c1c3681353c9",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "5154fe3d-dbbc-4bc6-8cc0-9919c5dab4d9",
+            "name": "Get all videogames",
+            "url": "localhost:8000/api/videogames",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-12-02T09:54:35.474Z",
+            "modified": "2023-12-02T09:54:54.030Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "88c38f02-dd42-46af-823c-bf81cb275088",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "5154fe3d-dbbc-4bc6-8cc0-9919c5dab4d9",
+            "name": "Update a videogame",
+            "url": "localhost:8000/api/videogame/2",
+            "method": "PUT",
+            "sortNum": 120000,
+            "created": "2023-12-02T09:57:12.088Z",
+            "modified": "2023-12-02T09:57:59.882Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"diablo2\"}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|d60sWWXxBsPZKWg3oXbvIqnfE45U4OlKRNqJQKhpca3f9523"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f3c3896d-d430-4962-a907-aaee74619e4b",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "88a1bae3-6eb4-4677-a1af-da392c41c9db",
+            "name": "Create",
+            "url": "localhost:8000/api/rooms",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2023-12-02T10:26:13.915Z",
+            "modified": "2023-12-02T10:42:55.899Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"sala del call of dutty\",\n  \"videogame_id\":1\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|2HltMdjYCsM2jKuIMI1YJB6KmQDnBW1M1d3EZjfn22e9256b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f55e9b2f-6a7d-49ec-bc35-6d99ad01cb00",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "88a1bae3-6eb4-4677-a1af-da392c41c9db",
+            "name": "Get all rooms",
+            "url": "localhost:8000/api/rooms",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2023-12-02T10:44:07.254Z",
+            "modified": "2023-12-02T10:44:25.738Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|2HltMdjYCsM2jKuIMI1YJB6KmQDnBW1M1d3EZjfn22e9256b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "95b005ae-d216-4844-9ca8-c996644ecdcb",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "88a1bae3-6eb4-4677-a1af-da392c41c9db",
+            "name": "Get a room by videogameID",
+            "url": "localhost:8000/api/rooms/2",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2023-12-02T10:45:51.751Z",
+            "modified": "2023-12-02T10:46:15.792Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|2HltMdjYCsM2jKuIMI1YJB6KmQDnBW1M1d3EZjfn22e9256b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b360c427-6293-490e-bb69-4178e8e3a782",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "88a1bae3-6eb4-4677-a1af-da392c41c9db",
+            "name": "Delete a room by id",
+            "url": "localhost:8000/api/rooms/2",
+            "method": "DELETE",
+            "sortNum": 190000,
+            "created": "2023-12-02T10:48:41.043Z",
+            "modified": "2023-12-02T10:48:56.606Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|2HltMdjYCsM2jKuIMI1YJB6KmQDnBW1M1d3EZjfn22e9256b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ff85262a-4c43-44e0-a1bb-7c00d54b5f69",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "88a1bae3-6eb4-4677-a1af-da392c41c9db",
+            "name": "Update a room by Id",
+            "url": "localhost:8000/api/rooms/1",
+            "method": "PUT",
+            "sortNum": 200000,
+            "created": "2023-12-02T10:52:01.877Z",
+            "modified": "2023-12-02T10:52:26.455Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"sala 1 actualizada por id\"}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "2|2HltMdjYCsM2jKuIMI1YJB6KmQDnBW1M1d3EZjfn22e9256b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5af5e160-3775-49a8-914f-d13ce700fe8f",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "42670011-49f8-454e-aaa2-4f32661a1c4e",
+            "name": "create member",
+            "url": "localhost:8000/api/member/",
+            "method": "POST",
+            "sortNum": 210000,
+            "created": "2023-12-02T17:23:29.755Z",
+            "modified": "2023-12-02T17:30:48.600Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user\":1,\n  \"room_id\": 1 }",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|vQK5469xmNWVLofbXTM3gGIoH6hrU82y0TczOLQSf3463bcb"
+            },
+            "tests": []
+        },
+        {
+            "_id": "07b155b3-82c8-45ca-ae18-922857893577",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "42670011-49f8-454e-aaa2-4f32661a1c4e",
+            "name": "delete member",
+            "url": "localhost:8000/api/member",
+            "method": "DELETE",
+            "sortNum": 220000,
+            "created": "2023-12-02T17:28:52.955Z",
+            "modified": "2023-12-02T17:29:59.166Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"user\":1,\n  \"room_id\": 1 }",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|vQK5469xmNWVLofbXTM3gGIoH6hrU82y0TczOLQSf3463bcb"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2781743c-79cc-4386-968f-44ebf7438599",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "42670011-49f8-454e-aaa2-4f32661a1c4e",
+            "name": "get all members",
+            "url": "localhost:8000/api/members/",
+            "method": "GET",
+            "sortNum": 230000,
+            "created": "2023-12-02T17:31:33.889Z",
+            "modified": "2023-12-02T17:33:18.243Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "3|vQK5469xmNWVLofbXTM3gGIoH6hrU82y0TczOLQSf3463bcb"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6dad8efc-b67f-4fba-b51d-8957c2dd6bdd",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "9249d4a8-02c1-4f59-9ba8-26e7acc1cd0a",
+            "name": "create message",
+            "url": "localhost:8000/api/message",
+            "method": "POST",
+            "sortNum": 240000,
+            "created": "2023-12-04T08:19:00.024Z",
+            "modified": "2023-12-04T15:10:23.293Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{ \"room_id\":1,\n  \"message\": \"mensaje test desde el thunderclient\"}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|2OpaIcTReLRnBxk6lKlzVL87TgOabUExksLwpKFG1e5cbc31"
+            },
+            "tests": []
+        },
+        {
+            "_id": "82f20dfa-1918-4cce-b7c9-05890879153b",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "9249d4a8-02c1-4f59-9ba8-26e7acc1cd0a",
+            "name": "get message by room id",
+            "url": "localhost:8000/api/messages/2",
+            "method": "GET",
+            "sortNum": 250000,
+            "created": "2023-12-04T15:34:54.559Z",
+            "modified": "2023-12-04T15:35:17.061Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|2OpaIcTReLRnBxk6lKlzVL87TgOabUExksLwpKFG1e5cbc31"
+            },
+            "tests": []
+        },
+        {
+            "_id": "dc6cea29-7b32-409d-ba6c-b32813c9f977",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "9249d4a8-02c1-4f59-9ba8-26e7acc1cd0a",
+            "name": "delete a message by id",
+            "url": "localhost:8000/api/messages/2",
+            "method": "DELETE",
+            "sortNum": 260000,
+            "created": "2023-12-04T15:53:02.997Z",
+            "modified": "2023-12-04T15:57:52.511Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|2OpaIcTReLRnBxk6lKlzVL87TgOabUExksLwpKFG1e5cbc31"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8c79aa8f-da9f-4de3-99d2-27969a8d40c7",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "9249d4a8-02c1-4f59-9ba8-26e7acc1cd0a",
+            "name": "update a message ",
+            "url": "localhost:8000/api/message/1",
+            "method": "PUT",
+            "sortNum": 270000,
+            "created": "2023-12-04T15:58:30.802Z",
+            "modified": "2023-12-04T15:59:46.031Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"message\": \"test update a message by id\"}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|2OpaIcTReLRnBxk6lKlzVL87TgOabUExksLwpKFG1e5cbc31"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e426e96d-4352-4eec-a09b-1511d026e8dc",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "get all messages as a superadmin",
+            "url": "localhost:8000/api/allMessages",
+            "method": "GET",
+            "sortNum": 280000,
+            "created": "2023-12-04T16:00:26.013Z",
+            "modified": "2023-12-04T21:36:38.049Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "e20649a8-8a78-4d69-a519-a37011c8d5c4",
+            "colId": "705cccd5-ba09-46d1-b831-e3ab36974dd7",
+            "containerId": "1de531ff-6781-424f-a5e5-bb851de576b6",
+            "name": "get all rooms as a superadmin",
+            "url": "localhost:8000/api/allRooms",
+            "method": "GET",
+            "sortNum": 290000,
+            "created": "2023-12-04T21:36:56.867Z",
+            "modified": "2023-12-04T21:37:03.965Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
