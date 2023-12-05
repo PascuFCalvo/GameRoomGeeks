@@ -22,6 +22,8 @@ class RoomController extends Controller
             'videogame_id' => $videogame_id,
             'room_owner' => $id
          ]);
+         $newRoom->users()->attach($id);
+         
          return response()->json(
             [
                "success" => true,
