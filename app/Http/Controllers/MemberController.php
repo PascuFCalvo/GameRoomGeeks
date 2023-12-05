@@ -16,17 +16,11 @@ class MemberController extends Controller
         try {
             $userId = auth()->user()->id;
             $roomId = $request->input("room_id");
-            // $room = Room::query()
-            // ->where("id", $roomId)
-            // ->firstOrFail();
-
-            // $userExist = Member::query()
-            // ->where("room_id", $roomId)
-            // ->where("user_id", $user)
-
-            // ->first();
-           
-          
+            $room = Room::query()
+            ->where("id", $roomId)
+            ->firstOrFail();
+    
+                  
             $user = User::find($userId);
             if (!$user) {
                 return response()->json(

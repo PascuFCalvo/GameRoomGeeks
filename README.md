@@ -80,7 +80,6 @@ php artisan db:seed
 -   `Route::delete('/messages/{id}')`Delete a message.
 -   `Route::put('/message/{id}')`Edit a message.
 -   `Route::get('/allMessages')`Get all messages as a superadmin.
--   `Route::get('/allRooms')`Get all rooms as a superadmin.
 
 </details>
 

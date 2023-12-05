@@ -161,24 +161,7 @@
             },
             "tests": []
         },
-        {
-            "_id": "71e21589-6c4c-4769-beb9-312ca2f21bcd",
-            "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
-            "containerId": "",
-            "name": "allRooms by superAdmin",
-            "url": "localhost:8000/api/allRooms",
-            "method": "GET",
-            "sortNum": 100000,
-            "created": "2023-12-04T15:49:08.916Z",
-            "modified": "2023-12-04T15:49:08.916Z",
-            "headers": [],
-            "params": [],
-            "auth": {
-                "type": "bearer",
-                "bearer": "1|43sV9DsoEM3KouyE9kq50QH0gbXCVhnmQA09Y6ew1f3b62da"
-            },
-            "tests": []
-        },
+        
         {
             "_id": "eb0f9c94-0aee-41cd-a0bc-bf602dc12537",
             "colId": "ad001504-8d70-4160-8f7a-ee41f4b6f591",
